@@ -49,10 +49,12 @@ if __name__ == "__main__":
     args.n_mlp = 8
 
     g = G(args, device)
-    dataset_path = os.path.join(args.input_path, args.dataset)
+    dataset_path = os.path.join(args.input_path)
+
     out_root = args.output
-    for s in glob.glob(os.path.join(dataset_path, "*/*")):
+
+    for s in glob.glob(dataset_path):
         args.input = s
-        args.output = os.path.join(out_root, args.dataset, '/'.join(args.input.split('/')[-2:]))
+        args.output = out_root
         print(f"Inferring for {args.input} and saving to {args.output}")
         run_inference_on_input(args, g)
